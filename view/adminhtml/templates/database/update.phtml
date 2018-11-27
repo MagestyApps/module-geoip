@@ -1,0 +1,57 @@
+<ul id="processRows"></ul>
+
+<script>
+    require([
+        "jquery"
+    ], function(jQuery){
+
+        var runProcess = function (data) {
+            var container = jQuery("#processRows");
+
+            var waitRow = container.find('li.wait').first();
+            if (waitRow) {
+                waitRow.removeClass('wait');
+            }
+
+            if(data.error) {
+                waitRow.addClass('error');
+            } else if (waitRow) {
+                waitRow.addClass('success');
+            }
+
+            var newRow = jQuery('<li></li>');
+
+            var newRowClass = 'wait';
+            if (data.error) {
+                newRowClass = 'error';
+            } else if (data.stop) {
+                newRowClass = 'done';
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+
+            newRow.addClass(newRowClass);
+            newRow.append(data.text);
+
+            container.append(newRow);
+
+            window.scrollTo(0,9000);
+            if (data.stop) {
+                return true;
+            }
+
+            jQuery.ajax(data.url, {
+                method: "get",
+                dataType: 'json',
+                success: function(result) {
+                    runProcess(result);
+                },
+            }
+        );
+
+        };
+
+        runProcess({'text':'<?php echo __('Preparing to update GeoIP database') ?>...', 'url':'<?php echo $this->getUrl('*/*/runUpdate/', ['step' => 'start']) ?>'});
+    });
+</script>

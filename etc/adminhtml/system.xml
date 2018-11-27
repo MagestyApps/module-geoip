@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 MagestyApps. All rights reserved.
+  ~  * See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magestyapps" translate="label" sortOrder="150">
+            <label>MagestyApps Extensions</label>
+        </tab>
+        <section id="magestyapps_geoip" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>GeoIP Switchers</label>
+            <tab>magestyapps</tab>
+            <resource>MagestyApps_GeoIP::settings</resource>
+            <group id="database" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>GeoIP Database</label>
+                <field id="last_update" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Last Updated At</label>
+                    <frontend_model>MagestyApps\GeoIP\Block\Adminhtml\System\Config\Database\UpdatedAt</frontend_model>
+                </field>
+                <field id="update_db" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Manual Update</label>
+                    <frontend_model>MagestyApps\GeoIP\Block\Adminhtml\System\Config\Database\Update</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,19 @@
+{
+  "name": "magestyapps/module-geoip",
+  "description": "GeoIP module for Magento 2",
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "type": "magento2-module",
+  "version": "2.3.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "MagestyApps\\GeoIP\\": ""
+    }
+  }
+}

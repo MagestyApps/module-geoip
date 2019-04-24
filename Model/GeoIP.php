@@ -9,6 +9,7 @@ namespace MagestyApps\GeoIP\Model;
 use Magento\Customer\Model\Session;
 use Magento\Directory\Model\Region;
 use Magento\Framework\DataObject;
+use Magento\Framework\DataObjectFactory;
 use MagestyApps\GeoIP\Helper\Database as DbHelper;
 use MagestyApps\GeoIP\Model\MaxMind\Db\Updater as DbUpdate;
 
@@ -37,22 +38,30 @@ class GeoIP
     private $dbUpdate;
 
     /**
-     * Geoip constructor.
+     * @var DataObjectFactory
+     */
+    private $dataObjectFactory;
+
+    /**
+     * GeoIP constructor.
      * @param Session $session
      * @param DbHelper $dbHelper
      * @param Region $regionModel
      * @param DbUpdate $dbUpdate
+     * @param DataObjectFactory $dataObjectFactory
      */
     public function __construct(
         Session $session,
         DbHelper $dbHelper,
         Region $regionModel,
-        DbUpdate $dbUpdate
+        DbUpdate $dbUpdate,
+        DataObjectFactory $dataObjectFactory
     ) {
         $this->session = $session;
         $this->dbHelper = $dbHelper;
         $this->regionModel = $regionModel;
         $this->dbUpdate = $dbUpdate;
+        $this->dataObjectFactory = $dataObjectFactory;
     }
 
     /**
@@ -62,12 +71,16 @@ class GeoIP
      */
     public function getCurrentLocation()
     {
-        if (!$this->session->getData(self::SESSION_PARAM_CODE)) {
+        $location = $this->session->getData(self::SESSION_PARAM_CODE);
+        if (!$location) {
             $location = $this->getLocation();
             $this->session->setData(self::SESSION_PARAM_CODE, $location);
         }
 
-        return new DataObject($this->session->getData(self::SESSION_PARAM_CODE));
+        $resultObject = $this->dataObjectFactory->create();
+        $resultObject->setData($location);
+
+        return $resultObject;
     }
 
     /**

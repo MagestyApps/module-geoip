@@ -2,10 +2,11 @@
   "name": "magestyapps/module-geoip",
   "description": "GeoIP module for Magento 2",
   "require": {
-    "php": ">=5.5.0"
+    "php": ">=5.5.0",
+    "magestyapps/module-base": ">=1.0.0"
   },
   "type": "magento2-module",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "license": [
     "OSL-3.0",
     "AFL-3.0"

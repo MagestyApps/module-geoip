@@ -5,9 +5,6 @@
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="magestyapps" translate="label" sortOrder="150">
-            <label>MagestyApps Extensions</label>
-        </tab>
         <section id="magestyapps_geoip" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>GeoIP Switchers</label>
             <tab>magestyapps</tab>
